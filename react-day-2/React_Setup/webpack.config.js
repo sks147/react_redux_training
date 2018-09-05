@@ -8,7 +8,7 @@ var config = {
 	},
 	mode: "development",
 	devServer: {
-		port: process.env.port
+		port: 1234
 	},
 
 	module:{
