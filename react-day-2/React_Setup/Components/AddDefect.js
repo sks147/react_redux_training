@@ -4,7 +4,12 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 class AddDefect extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            category: 'Functionality',
+            description: '',
+            priority: 6,
+            status: "Open"
+        };
         this.addNewDefect = this.addNewDefect.bind(this);
     }
 
@@ -28,15 +33,32 @@ class AddDefect extends Component {
                 <h1>Add Defect</h1>
                 <Form>
                     <FormGroup>
+                        {/* Warning : You provided a `value` prop to a form field without an `onChange` handler. */}
                         <Label for="select_category">Select Category</Label>
                         {/* instead of using id, we use ref, it corresponds to Virtual DOM */}
-                        <Input type="select" name="selectCategory" id="select_category" ref="refCategory">
+                        {/* this.state.xyz will make the form a controlled form, i.e react is controlling the state of the form*/}
+                        <Input value={this.state.category} type="select" id="select_category" ref="refCategory"
+                            onChange={()=>{
+                                this.setState({
+                                    category: this.refs.refCategory.value
+                                })
+                            }}>
                             <option value="UI">UI</option>
                             <option value="Functionality">Functionality</option>
                             <option value="Change Request">Change Request</option>
                         </Input>
-                        Description:<textarea ref="refDesc"></textarea> <br/><br/>
-                        Priority:<Input ref="refPriority" type='number'></Input>
+                        Description:<textarea value={this.state.description} ref="refDesc" 
+                        onChange={()=>{
+                            this.setState({
+                                description: this.refs.refDesc.value
+                            })
+                        }}></textarea> <br/><br/>
+                        Priority:<Input value={this.state.priority} ref="refPriority" type='number'
+                        onChange={()=>{
+                            this.setState({
+                                priority: this.refs.refPriority.value
+                            })
+                        }}></Input>
                         <Button type="button" onClick={this.addNewDefect}>Add Defect</Button>
                     </FormGroup>
                 </Form>
