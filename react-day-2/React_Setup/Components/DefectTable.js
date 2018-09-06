@@ -1,6 +1,6 @@
 import React from 'react';
 import TableRow from './TableRow';
-
+import { Table } from 'reactstrap';
 class DefectTable extends React.Component {
     constructor(props) {
         super(props);
@@ -40,7 +40,7 @@ class DefectTable extends React.Component {
 
     shouldComponentUpdate(){
         console.log('4. inside shouldComponentUpdate');
-        return false;
+        return true;
         // default is true
     }
 
@@ -86,7 +86,7 @@ class DefectTable extends React.Component {
         });
 
         return (
-            <table>
+            <Table striped>
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -100,7 +100,7 @@ class DefectTable extends React.Component {
                     {rows}
                     {/* <TableRow /> */}
                 </tbody>
-            </table>
+            </Table>
         )
     }
 }
