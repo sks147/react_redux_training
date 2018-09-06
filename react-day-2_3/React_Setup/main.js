@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
 import AddDefect from './Components/AddDefect';
+import FilterTable from './Components/FilterTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 // injecting this data into DefectTable Component
 var DEFECTS = [
@@ -35,6 +37,23 @@ localStorage.setItem('defects', JSON.stringify(DEFECTS));
 ReactDOM.render(
 	// <App data={DEFECTS} />,
 	// document.getElementById('app')
-	<AddDefect />,
-	document.getElementById('app')
+	// <AddDefect />,
+	// document.getElementById('app')
+
+	<BrowserRouter>
+		<React.Fragment>
+			<ul>
+				<li><Link to='/view-defects'> View Defects</Link></li>
+				<li><Link to='/'>Add Defects</Link></li>
+				<li><Link to='/filter-defects'>Filter Defects</Link></li>
+			</ul>
+			<Route path="/" exact component={AddDefect} />
+			<Route path="/view-defects/:count" component={App} />
+			<Route path="/filter-defects" component={FilterTable} />
+		</React.Fragment>
+	</BrowserRouter>
+	,document.getElementById('app')
+
+	// <FilterTable />,
+	// document.getElementById('app')
 );

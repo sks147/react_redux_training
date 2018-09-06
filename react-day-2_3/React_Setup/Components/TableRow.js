@@ -1,6 +1,7 @@
 import React from 'react';
 import Wrapper from './Wrapper';
 import PropTypes from 'prop-types';
+import {Button} from 'reactstrap';
 // Stateless component
 const TableRow = (props) => {
     return (
@@ -9,7 +10,7 @@ const TableRow = (props) => {
             <td>{props.description}</td>
             <td>{props.priority}</td>
             <td>{props.status}</td>
-            <td><button onClick={() => { props.onClosing(props.UniqueId); }}> Change Status </button></td>
+            <td><Button color="primary" onClick={() => { props.onClosing(props.UniqueId); }}> Change Status </Button></td>
         </tr>
     )
 }

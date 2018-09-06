@@ -9,10 +9,11 @@ class App extends Component{
 
     render(){
         console.log("From app component", this.props.data);
+        console.log('default props', this.props);
         return ( 
             <div>
                 <h1>Defect Table</h1>
-                <DefectTable defects/>
+                <DefectTable defectCount={this.props.match.params.count}/>
             </div>
            
         )

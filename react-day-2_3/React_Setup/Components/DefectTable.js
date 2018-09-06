@@ -1,6 +1,7 @@
 import React from 'react';
 import TableRow from './TableRow';
 import { Table } from 'reactstrap';
+import FilterTable from './FilterTable';
 class DefectTable extends React.Component {
     constructor(props) {
         super(props);
@@ -8,6 +9,7 @@ class DefectTable extends React.Component {
             defectData: []
         };
         this.changeDefectStatus = this.changeDefectStatus.bind(this);
+        this.filterDefectTable = this.filterDefectTable.bind(this);
     }
 
     // Life cycle of components
@@ -64,9 +66,23 @@ class DefectTable extends React.Component {
         });
     }
 
+    // filter Defect Table function
+    filterDefectTable(defectCategory){
+        let currentData = this.state.defectData;
+        currentData = currentData.filter((item)=>{
+            if(defectCategory == item.category){
+                return true;
+            }
+        });
+        this.setState({
+            defectData: currentData
+        });
+    }
+
     render() {
         console.log("2. Inside render Method");
         console.log("From DefectTable : ", this.props.defects);
+        <FilterTable></FilterTable>
         var rows = [];
         this.state.defectData.forEach((item, index) => {
             rows.push(
@@ -81,26 +97,32 @@ class DefectTable extends React.Component {
                     priority={item.priority}
                     status={item.status}
                     onClosing={this.changeDefectStatus}
+                    onFilter={this.filterDefectTable}
                 />
             );
         });
 
         return (
-            <Table striped>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>Change Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                    {/* <TableRow /> */}
-                </tbody>
-            </Table>
+            <React.Fragment>
+                <p>{this.props.defectCount}</p>
+                <Table dark striped>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Change Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows}
+                        {/* <TableRow /> */}
+                    </tbody>
+                </Table>
+                <FilterTable></FilterTable>
+            </React.Fragment>
+            
         )
     }
 }
