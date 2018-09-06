@@ -12,7 +12,7 @@ class App extends Component{
         return ( 
             <div>
                 <h1>Defect Table</h1>
-                <DefectTable defects={this.props.data}/>
+                <DefectTable defects/>
             </div>
            
         )
