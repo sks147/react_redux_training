@@ -12,7 +12,7 @@ function htmlTemplate(reactDom){
         <!DOCTYPE html>
         <html>
         <head>
-            <title>React Server Side Routing</title>
+            <title>React Server Side Rendering</title>
         </head>
         <body>
             <div id="app">
