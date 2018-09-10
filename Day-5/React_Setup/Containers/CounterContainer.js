@@ -1,7 +1,8 @@
 // these containers pass the state in redux architecture as the props of the components
 import {connect} from 'react-redux';
-import {Counter} from '../Components/Counter';
+import Counter from '../Components/Counter';
 import { Increment } from '../Actions/counterActions';
+import { Decrement } from '../Actions/counterActions';
 
 // map states
 var mapStateToProps=(state)=>{
