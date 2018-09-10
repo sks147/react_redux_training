@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build": "webpack",
-    "start": "babel-node server.js --presets @babel/preset-env,@babel/preset-react"
+    "start": "webpack-dev-server --hot"
   },
   "author": "",
   "license": "ISC",

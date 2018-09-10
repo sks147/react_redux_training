@@ -1,63 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './Components/App';
-import Login from './Components/Login';
-import AddDefect from './Components/AddDefect';
-import FilterTable from './Components/FilterTable';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {createStore} from 'redux';
 
-// injecting this data into DefectTable Component
-var DEFECTS = [
-	{
-		id:0,
-		category: "UI",
-		description: "Button not appearing",
-		priority: 3,
-		status: "Open"
-	},
-	{
-		id:1,
-		category: "funtionality",
-		description: "submit not working",
-		priority: 1,
-		status: "Open"
-	},
-	{
-		id:2,
-		category: "Change Request",
-		description: "Implement Certificate Functionality",
-		priority: 2,
-		status: "Open"
+// reducer
+var reducer = (state = {
+	count: 0
+}, action) => {
+	let currentVal = state.count;
+	switch (action.type) {
+		case "INCREMENT":
+			return Object.assign({}, state, { count: currentVal + 1 })
+			// return state.count = state.count+1;
+		case "DECREMENT":
+			return Object.assign({}, state, { count: currentVal - 1 + action.step});
+			// return state.count = state.count-1;
+		default:
+			return state;
 	}
-]
+}
 
-localStorage.setItem('defects', JSON.stringify(DEFECTS));
-// localStorage stores the data only in string format
+// store
+// stores the state object
+var store = createStore(reducer);
+// whenever store changes functions inside subscribe function will be executed
+store.subscribe(()=>{
+	console.log('store changed', store.getState());
+})
 
-ReactDOM.render(
-	// <App data={DEFECTS} />,
-	// document.getElementById('app')
-	// <AddDefect />,
-	// document.getElementById('app')
-
-	<BrowserRouter>
-		<React.Fragment>
-			<ul>
-				<li><Link to='/'>Login</Link></li>
-				<li><Link to='/view-defects'> View Defects</Link></li>
-				<li><Link to='/add-defects'>Add Defects</Link></li>
-				<li><Link to='/filter-defects'>Filter Defects</Link></li>
-			</ul>
-			<Route path="/" exact component={Login} />
-			<Route path="/add-defects" exact component={AddDefect} />
-			<Route path="/view-defects/" exact component={App} />
-			<Route path="/view-defects/:count" component={App} />
-			<Route path="/filter-defects" component={FilterTable} />
-		</React.Fragment>
-	</BrowserRouter>
-	,document.getElementById('app')
-
-	// <FilterTable />,
-	// document.getElementById('app')
-);
+// actions 
+// used in order to execute the action
+store.dispatch({type:"INCREMENT", step: 3});
+store.dispatch({type:"INCREMENT", step: 2});
+store.dispatch({type:"DECREMENT", step: 3});
+store.dispatch({type:"INCREMENT", step: 1});
+store.dispatch({type:"INCREMENT", step: 3});
+store.dispatch({type:"DECREMENT", step: 2});
