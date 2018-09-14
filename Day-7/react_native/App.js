@@ -3,21 +3,20 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 
 // You can import from local files
-import AssetExample from './components/AssetExample';
+import HarryPotter from './components/HarryPotter';
 
 // or any pure javascript modules available in npm
-import { Card } from 'react-native-elements'; // 0.19.1
+import { Card } from 'react-native-elements'; // Version can be specified in package.json
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
-          Change code in the editor and watch it change on your phone! Save to
-          get a shareable url.
+          
         </Text>
-        <Card title="Local Modules">
-          <AssetExample />
+        <Card title="Harry Potter" >
+          <HarryPotter summary ="An orphaned boy enrolled in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world."/>
         </Card>
       </View>
     );
