@@ -1,20 +1,29 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, Switch } from 'react-native';
 
 export default class HarryPotter extends React.Component {
   constructor(){
     super();
     this.state = {
       name: 'Harry'
+      showName: false
     }
   }
-
+  
+  onChange(value){
+    this.setState({
+      showName: value
+    })
+  }
+  
   render() {
+    let name = this.state.showName ? this.state.name: 'Guest';
     return (
       <View style={styles.container}>
         <Text style={styles.paragraph}>
           {this.state.name} : {this.props.summary}
         </Text>
+        <Switch value= {this.state.showName} onValueChange={(value) => onChange(value)}/>
         <Image style={styles.logo} source={require("../assets/harry-potter.png")}/>
       </View>
     );
