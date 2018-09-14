@@ -5,9 +5,10 @@ export default class HarryPotter extends React.Component {
   constructor(){
     super();
     this.state = {
-      name: 'Harry'
+      name: 'Harry',
       showName: false
     }
+    this.onChange = this.onChange.bind(this);
   }
   
   onChange(value){
@@ -23,7 +24,7 @@ export default class HarryPotter extends React.Component {
         <Text style={styles.paragraph}>
           {this.state.name} : {this.props.summary}
         </Text>
-        <Switch value= {this.state.showName} onValueChange={(value) => onChange(value)}/>
+        <Switch value= {this.state.showName} onValueChange={(value) => this.onChange(value)}/>
         <Image style={styles.logo} source={require("../assets/harry-potter.png")}/>
       </View>
     );
